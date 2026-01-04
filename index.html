@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Parisha 🎉</title>  <style>
+  <title>For Parisha 💖</title>  <style>
     body {
       margin: 0;
       min-height: 100vh;
@@ -11,14 +11,21 @@
       justify-content: center;
       align-items: center;
       font-family: 'Segoe UI', sans-serif;
-      overflow-x: hidden;
+      overflow: hidden;
       color: #fff;
+      position: relative;
     }
 
-    .container {
+    .page {
+      display: none;
       width: 90%;
       max-width: 900px;
       text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .page.active {
+      display: block;
     }
 
     .card {
@@ -27,30 +34,18 @@
       padding: 40px;
       border-radius: 25px;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-      animation: float 4s ease-in-out infinite;
+      opacity: 0;
+      animation: fadeInCard 1s forwards;
     }
 
     h1 {
       font-size: 3rem;
-      margin-bottom: 10px;
-      animation: glow 2s infinite alternate;
+      margin-bottom: 15px;
     }
 
     p {
-      font-size: 1.2rem;
-      opacity: 0.95;
-    }
-
-    .love-line {
-      margin-top: 20px;
-      font-size: 1.4rem;
-      font-style: italic;
-    }
-
-    .countdown {
-      margin-top: 25px;
       font-size: 1.3rem;
-      letter-spacing: 1px;
+      opacity: 0;
     }
 
     button {
@@ -62,16 +57,10 @@
       background: #fff;
       color: #333;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
 
     .gallery {
-      margin-top: 50px;
+      margin-top: 30px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
@@ -79,87 +68,113 @@
 
     .gallery img {
       width: 100%;
-      height: 250px;
+      height: 240px;
       object-fit: cover;
       border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s;
     }
 
-    .gallery img:hover {
-      transform: scale(1.05);
+    .typing {
+      display: inline-block;
+      border-right: 2px solid #fff;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: floatHeart 3s linear;
     }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #fff; }
-      to { text-shadow: 0 0 25px #fff; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
     }
   </style></head>
-<body>  <!-- Background Music -->  <audio id="bgMusic" loop>
+<body>  <audio id="bgMusic" loop>
     <source src="music.mp3" type="audio/mpeg">
-  </audio>  <div class="container">
+  </audio>  <div class="page active" id="page1">
     <div class="card">
-      <h1>Happy Birthday Parisha 🎂</h1>
-      <p>To someone who was always with me in my ups and specially in my downs ✨</p><div class="love-line">
-    “You’ll always be my favorite and I’ll love you forever.” 💖
-  </div>
-
-  <div class="countdown" id="countdown"></div>
-
-  <button onclick="toggleMusic()">Play Music 🎶</button>
-  <br /><br />
-  <button onclick="scrollToGallery()">Memories 🤍</button>
-</div>
-
-<!-- Photo Gallery -->
-<div class="gallery" id="gallery">
-  <img src="photo1.jpg" alt="memory 1" />
-  <img src="photo2.jpg" alt="memory 2" />
-  <img src="photo3.jpg" alt="memory 3" />
-</div>
-
+      <h1 class="typing" id="text1">Hey Parisha 💕</h1>
+      <p class="typing" id="p1">I made this just for you…</p>
+      <button onclick="nextPage(2)">Next →</button>
+    </div>
+  </div>  <div class="page" id="page2">
+    <div class="card">
+      <h1 class="typing" id="text2">Happy Birthday 🎂</h1>
+      <p class="typing" id="p2">You make everything a little more beautiful ✨</p>
+      <button onclick="toggleMusic()">Play Music 🎶</button><br><br>
+      <button onclick="nextPage(3)">Next →</button>
+    </div>
+  </div>  <div class="page" id="page3">
+    <div class="card">
+      <h1 class="typing" id="text3">For You 🤍</h1>
+      <p class="typing" id="p3">“You’ll always be my favorite and I’ll love you forever.”</p>
+      <button onclick="nextPage(4)">Next →</button>
+    </div>
+  </div>  <div class="page" id="page4">
+    <div class="card">
+      <h1 class="typing" id="text4">Memories 🌸</h1>
+      <div class="gallery">
+        <img src="photo1.jpg" />
+        <img src="photo2.jpg" />
+        <img src="photo3.jpg" />
+      </div>
+      <p style="margin-top:20px;">Made with 💖 just for you</p>
+    </div>
   </div>  <script>
-    // Countdown (change date if needed)
-    const birthday = new Date('2006-07-09T00:00:00');
-
-    function updateCountdown() {
-      const now = new Date();
-      const diff = birthday - now;
-
-      if (diff <= 0) {
-        document.getElementById('countdown').innerHTML = '🎉 It\'s your day, Parisha! 🎉';
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById('countdown').innerHTML =
-        `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s 💫`;
+    function nextPage(n) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page' + n).classList.add('active');
+      createHearts();
+      startTyping(n);
     }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
 
     function toggleMusic() {
       const music = document.getElementById('bgMusic');
-      if (music.paused) {
-        music.play();
-      } else {
-        music.pause();
+      music.paused ? music.play() : music.pause();
+    }
+
+    function createHearts() {
+      for(let i=0;i<10;i++){
+        const heart = document.createElement('div');
+        heart.className='heart';
+        heart.style.left=Math.random()*100+'vw';
+        heart.style.animationDuration=(2+Math.random()*2)+'s';
+        heart.innerHTML='❤️';
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),3000);
       }
     }
 
-    function scrollToGallery() {
-      document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
-    });
+    function typeText(elementId) {
+      const el = document.getElementById(elementId);
+      const text = el.innerText;
+      el.innerText = '';
+      let i = 0;
+      const interval = setInterval(()=>{
+        el.innerText += text[i];
+        i++;
+        if(i>=text.length) clearInterval(interval);
+      },50);
     }
+
+    function startTyping(pageNumber){
+      typeText('text'+pageNumber);
+      typeText('p'+pageNumber);
+    }
+
+    // Start typing for page 1 on load
+    startTyping(1);
   </script></body>
 </html>
